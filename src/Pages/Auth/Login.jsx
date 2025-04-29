@@ -1,15 +1,17 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
-// import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-// import { toast } from 'sonner';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast, Toaster } from 'sonner';
 import loginimg from "../../assets/login.svg"
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import { AuthContext } from "../../Providers/Authcontext";
 import { useEffect } from "react";
+
+
+
 
 const Login = () => {
     const [passwordShown, setPasswordShown] = useState(false);
@@ -19,46 +21,46 @@ const Login = () => {
         AOS.init({ duration: 800, once: true });
     }, []);
 
-    //   const { creategoogleUser } = useContext(AuthContext);
+    const {signInUser, creategoogleUser } = useContext(AuthContext);
 
-    //   const { idsignin } = useContext(AuthContext);
-    //   const location = useLocation();
-    //   const navigate = useNavigate();
-    //   console.log(location);
 
-    //   const handlesignin = e => {
-    //     e.preventDefault();
-    //     const form = new FormData(e.currentTarget);
-    //     const email = form.get("email");
-    //     const password = form.get("password");
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location);
 
-    //     idsignin(email, password)
-    //       .then(result => {
-    //         navigate(location?.state ? location.state : "/");
-    //         toast.success('Successfully logged in!');
-    //         console.log(result.user);
-    //       })
-    //       .catch(error => {
-    //         toast.error('Failed to log in');
-    //         console.error(error);
+    const handlesignin = e => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const email = form.get("email");
+        const password = form.get("password");
 
-    //       })
+        signInUser(email, password)
+            .then(result => {
+                navigate(location?.state ? location.state : "/");
+                toast.success('Successfully logged in!');
+                console.log(result.user);
+            })
+            .catch(error => {
+                toast.error('Failed to log in');
+                console.error(error);
 
-    //   };
+            })
 
-    //   // google er login 
-    //   const handlegoogle = () => {
-    //     creategoogleUser()
-    //       .then(result => {
-    //         navigate(location?.state ? location.state : "/");
-    //         toast.success('Successfully logged in with Google!');
-    //         console.log(result.user);
-    //       })
-    //       .catch(error => {
-    //         toast.error('Failed to log in with Google');
-    //         console.error(error);
-    //       })
-    //   };
+    };
+
+    // google er login 
+    const handlegoogle = () => {
+        creategoogleUser()
+            .then(result => {
+                navigate(location?.state ? location.state : "/");
+                toast.success('Successfully logged in with Google!');
+                console.log(result.user);
+            })
+            .catch(error => {
+                toast.error('Failed to log in with Google');
+                console.error(error);
+            })
+    };
 
 
 
@@ -85,7 +87,7 @@ const Login = () => {
                         Enter your email and password to sign in
                     </Typography>
 
-                    <form className="text-left">
+                    <form onSubmit={handlesignin} className="text-left">
                         {/* Email */}
                         <div className="mb-6">
                             <label htmlFor="email">
@@ -168,6 +170,8 @@ const Login = () => {
 
                     {/* Google Sign In */}
                     <Button
+                        onClick={handlegoogle}
+
                         variant="outlined"
                         size="lg"
                         className="mt-6 flex h-12 items-center justify-center gap-2"
