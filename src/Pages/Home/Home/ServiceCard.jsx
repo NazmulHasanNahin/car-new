@@ -2,6 +2,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 const ServiceCard = ({ service }) => {
     const { _id, title, img, price } = service;
     // , description, facility
@@ -23,9 +24,9 @@ const ServiceCard = ({ service }) => {
                 {/* <p className="text-neutral-600 text-sm mb-4">{description}</p> */}
                 <div className="flex">
                     <p className="text-xl text-[#FF3811] mr-36 font-bold">Price: <span className="text-2xl">${price}</span></p>
-                    <button className="text-[#FF3811] text-2xl transition-all duration-300 transform hover:scale-110 hover:bg-[#FF5700] hover:text-white p-2 rounded-full shadow-md">
+                    <Link to={`/checkout/${_id}`} className="text-[#FF3811] text-2xl transition-all duration-300 transform hover:scale-110 hover:bg-[#FF5700] hover:text-white p-2 rounded-full shadow-md">
                         <FaArrowRight />
-                    </button>
+                    </Link>
 
                 </div>
 
