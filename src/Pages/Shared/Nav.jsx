@@ -50,20 +50,22 @@ const Nav = () => {
                                             Home
                                         </NavLink>
                                     </li>
-                                    <li>
-                                        <NavLink
-                                            to="/addspots"
-                                            className={`btn ${isActive("/addspots") ? "bg-[#FF3811] text-white" : "btn-ghost"}`}>
-                                            Add Tourist Spot
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            to="/allspots"
-                                            className={`btn ${isActive("/allspots") ? "bg-[#FF3811] text-white" : "btn-ghost"}`}>
-                                            All Tourist Spots
-                                        </NavLink>
-                                    </li>
+                                    {user ?
+                                        <li>
+                                            <NavLink
+                                                to="/bookings"
+                                                className={`btn ${isActive("/bookings") ? "bg-[#FF3811] text-white" : "btn-ghost"}`}>
+                                                All Bookings
+                                            </NavLink>
+                                        </li> :
+                                        <li>
+                                            <NavLink
+                                                to="/"
+                                                className={`btn ${isActive("/") ? "bg-[#FF3811] text-white" : "btn-ghost"}`}>
+                                                Add Tourist Spot
+                                            </NavLink>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </ul>
@@ -84,20 +86,24 @@ const Nav = () => {
                                         Home
                                     </NavLink>
                                 </li>
-                                <li>
-                                    <NavLink
-                                        to="/addspots"
-                                        className={`btn ${isActive("/addspots") ? "bg-[#FF3811] text-white" : "btn-ghost"}`}>
-                                        Add Tourist Spot
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink
-                                        to="/allspots"
-                                        className={`btn ${isActive("/allspots") ? "bg-[#FF3811] text-white" : "btn-ghost"}`}>
-                                        All Tourist Spots
-                                    </NavLink>
-                                </li>
+                                {user ?
+                                    <li>
+                                        <NavLink
+                                            to="/bookings"
+                                            className={`btn ${isActive("/bookings") ? "bg-[#FF3811] text-white" : "btn-ghost"}`}>
+                                            All Bookings
+                                        </NavLink>
+                                    </li> :
+                                    <li>
+                                        <NavLink
+                                            to="/"
+                                            className={`btn ${isActive("/") ? "bg-[#FF3811] text-white" : "btn-ghost"}`}>
+                                            Add Tourist Spot
+                                        </NavLink>
+                                    </li>
+                                }
+
+
                             </ul>
                         </div>
                     </ul>
