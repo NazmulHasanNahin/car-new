@@ -16,16 +16,17 @@ import { useEffect } from "react";
 const Login = () => {
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
+    const location = useLocation();
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         AOS.init({ duration: 800, once: true });
     }, []);
 
-    const {signInUser, creategoogleUser } = useContext(AuthContext);
+    const { signInUser, creategoogleUser } = useContext(AuthContext);
 
 
-    const location = useLocation();
-    const navigate = useNavigate();
     console.log(location);
 
     const handlesignin = e => {
@@ -39,6 +40,8 @@ const Login = () => {
                 navigate(location?.state ? location.state : "/");
                 toast.success('Successfully logged in!');
                 console.log(result.user);
+                navigate(location?.state ? location?.state : "/")
+
             })
             .catch(error => {
                 toast.error('Failed to log in');
@@ -55,6 +58,8 @@ const Login = () => {
                 navigate(location?.state ? location.state : "/");
                 toast.success('Successfully logged in with Google!');
                 console.log(result.user);
+                navigate(location?.state ? location?.state : "/")
+
             })
             .catch(error => {
                 toast.error('Failed to log in with Google');
