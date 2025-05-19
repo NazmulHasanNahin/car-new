@@ -14,7 +14,7 @@ const Nav = () => {
     const handlelogout = () => {
         logout()
             .then(result => {
-                toast.success('Successfully logged out');
+                toast.warning('Successfully logged out');
                 console.log(result.user);
             })
     }

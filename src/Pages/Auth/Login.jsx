@@ -9,6 +9,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { AuthContext } from "../../Providers/Authcontext";
 import { useEffect } from "react";
+import axios from "axios";
 
 
 
@@ -37,10 +38,14 @@ const Login = () => {
 
         signInUser(email, password)
             .then(result => {
-                navigate(location?.state ? location.state : "/");
                 toast.success('Successfully logged in!');
                 console.log(result.user);
-                navigate(location?.state ? location?.state : "/")
+                // navigate(location?.state ? location?.state : "/")
+                const user = { email };
+                axios.post("http://localhost:5000/jwt", user,{withCredentials : true})
+                .then(res => console.log(res.data));
+                                                                                            
+
 
             })
             .catch(error => {
@@ -55,10 +60,10 @@ const Login = () => {
     const handlegoogle = () => {
         creategoogleUser()
             .then(result => {
-                navigate(location?.state ? location.state : "/");
                 toast.success('Successfully logged in with Google!');
                 console.log(result.user);
                 navigate(location?.state ? location?.state : "/")
+
 
             })
             .catch(error => {
